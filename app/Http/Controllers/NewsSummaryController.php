@@ -20,9 +20,17 @@ class NewsSummaryController extends Controller
     /**
      * Show the minimalist search/create page.
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('summaries.create');
+        $initialSession = null;
+        if ($sessionId = $request->query('session_id')) {
+            $sessionModel = SearchSession::with('newsSummary')->find($sessionId);
+            if ($sessionModel) {
+                $initialSession = $this->formatSessionPayload($sessionModel);
+            }
+        }
+
+        return view('summaries.create', compact('initialSession'));
     }
 
     /**
@@ -53,12 +61,10 @@ class NewsSummaryController extends Controller
         if ($request->wantsJson()) {
             $session->refresh();
 
-            return response()->json([
+            return response()->json(array_merge([
                 'message' => 'Proses pencarian dan analisis berita sedang berjalan.',
                 'search_session_id' => $session->id,
-                'status' => $session->status,
-                'summary_id' => $session->newsSummary?->id,
-            ], 202);
+            ], $this->formatSessionPayload($session)), 202);
         }
 
         return redirect()->route('dashboard')->with('success', "Permintaan rangkuman untuk '{$query}' berhasil diproses.");
@@ -104,12 +110,101 @@ class NewsSummaryController extends Controller
     {
         $session = SearchSession::with('newsSummary')->findOrFail($sessionId);
 
+        return response()->json($this->formatSessionPayload($session));
+    }
+
+    /**
+     * Real-time Server-Sent Events (SSE) stream for search session status.
+     */
+    public function stream(int $sessionId)
+    {
+        $session = SearchSession::with('newsSummary')->find($sessionId);
+        if (! $session) {
+            return response()->json(['error' => 'Sesi pencarian tidak ditemukan.'], 404);
+        }
+
+        return response()->stream(function () use ($sessionId) {
+            if (ob_get_level() > 0) {
+                ob_end_clean();
+            }
+
+            $startTime = time();
+            $maxDuration = 180; // Safety timeout
+
+            while (time() - $startTime < $maxDuration) {
+                if (connection_aborted()) {
+                    break;
+                }
+
+                $session = SearchSession::with('newsSummary')->find($sessionId);
+                if (! $session) {
+                    echo "event: error\n";
+                    echo 'data: '.json_encode(['error' => 'Sesi tidak ditemukan'])."\n\n";
+                    flush();
+                    break;
+                }
+
+                $payload = $this->formatSessionPayload($session);
+
+                echo 'data: '.json_encode($payload)."\n\n";
+                flush();
+
+                if (in_array($session->status, ['completed', 'failed'], true)) {
+                    break;
+                }
+
+                usleep(700000); // 700ms stream interval
+            }
+        }, 200, [
+            'Content-Type' => 'text/event-stream',
+            'Cache-Control' => 'no-cache, no-store, must-revalidate',
+            'Connection' => 'keep-alive',
+            'X-Accel-Buffering' => 'no',
+        ]);
+    }
+
+    /**
+     * Cancel an ongoing search session.
+     */
+    public function cancel(int $sessionId)
+    {
+        $session = SearchSession::findOrFail($sessionId);
+
+        if ($session->status !== 'completed') {
+            $session->update([
+                'status' => 'failed',
+                'error_message' => 'Pencarian dibatalkan oleh pengguna.',
+                'description' => 'Pencarian dibatalkan oleh pengguna.',
+            ]);
+        }
+
         return response()->json([
+            'success' => true,
+            'message' => 'Pencarian berhasil dibatalkan.',
+        ]);
+    }
+
+    /**
+     * Format search session according to the backend status contract.
+     */
+    public function formatSessionPayload(SearchSession $session): array
+    {
+        $summaryId = $session->newsSummary?->id;
+
+        return [
             'session_id' => $session->id,
             'status' => $session->status,
+            'current_stage' => $session->current_stage ?? ($session->status === 'completed' ? 'completed' : 'initializing'),
+            'stage_label' => $session->stage_label ?? ($session->status === 'completed' ? 'Selesai' : 'Mempersiapkan pencarian'),
+            'description' => $session->description ?? ($session->status === 'completed' ? 'Rangkuman berita berhasil dibuat.' : 'Sedang memproses pencarian...'),
+            'progress' => $session->progress ?? ($session->status === 'completed' ? 100 : 5),
+            'completed_stages' => $session->completed_stages ?? [],
+            'meta' => $session->meta ?? [],
+            'error' => $session->error_message,
             'error_message' => $session->error_message,
-            'summary_id' => $session->newsSummary?->id,
-        ]);
+            'summary_id' => $summaryId,
+            'redirect_url' => $summaryId ? route('summaries.show', $summaryId) : null,
+        ];
     }
 
     /**

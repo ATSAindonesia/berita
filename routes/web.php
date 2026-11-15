@@ -25,3 +25,5 @@ Route::post('/summaries', [NewsSummaryController::class, 'store'])->name('summar
 Route::get('/summaries/{summary}', [NewsSummaryController::class, 'show'])->name('summaries.show');
 Route::post('/summaries/{summary}/follow-up', [NewsSummaryController::class, 'followUp'])->name('summaries.follow_up');
 Route::get('/summaries/status/{sessionId}', [NewsSummaryController::class, 'status'])->name('summaries.status');
+Route::get('/summaries/status/{sessionId}/stream', [NewsSummaryController::class, 'stream'])->name('summaries.stream');
+Route::post('/summaries/status/{sessionId}/cancel', [NewsSummaryController::class, 'cancel'])->name('summaries.cancel');

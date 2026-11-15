@@ -21,6 +21,12 @@ class NewsStorageService
         return SearchSession::create([
             'prompt' => $prompt,
             'status' => 'pending',
+            'current_stage' => 'initializing',
+            'stage_label' => 'Mempersiapkan proses pencarian berita',
+            'description' => 'Mempersiapkan proses dan analisis untuk pencarian berita.',
+            'progress' => 5,
+            'completed_stages' => [],
+            'meta' => [],
         ]);
     }
 
@@ -31,6 +37,51 @@ class NewsStorageService
     {
         $model = $session instanceof SearchSession ? $session : SearchSession::findOrFail($session);
         $model->update($data);
+
+        return $model;
+    }
+
+    /**
+     * Update the real-time processing stage, label, progress, and metadata of a search session.
+     */
+    public function updateStage(
+        int|SearchSession $session,
+        string $stage,
+        string $stageLabel,
+        string $description,
+        ?int $progress = null,
+        array $meta = []
+    ): SearchSession {
+        $model = $session instanceof SearchSession ? $session : SearchSession::findOrFail($session);
+
+        $completedStages = $model->completed_stages ?? [];
+        if ($model->current_stage && ! in_array($model->current_stage, $completedStages, true) && $model->current_stage !== $stage) {
+            $completedStages[] = $model->current_stage;
+        }
+
+        if ($stage === 'completed' && ! in_array('completed', $completedStages, true)) {
+            $completedStages[] = 'completed';
+        }
+
+        $existingMeta = $model->meta ?? [];
+        $mergedMeta = array_merge($existingMeta, $meta);
+
+        $status = $stage === 'completed' ? 'completed' : ($model->status === 'failed' ? 'failed' : 'processing');
+
+        $updateData = [
+            'status' => $status,
+            'current_stage' => $stage,
+            'stage_label' => $stageLabel,
+            'description' => $description,
+            'completed_stages' => array_values(array_unique($completedStages)),
+            'meta' => $mergedMeta,
+        ];
+
+        if ($progress !== null) {
+            $updateData['progress'] = $progress;
+        }
+
+        $model->update($updateData);
 
         return $model;
     }
@@ -173,9 +224,14 @@ class NewsStorageService
             }
 
             // 4. Mark search session as completed
-            $this->updateSearchSession($sessionId, [
-                'status' => 'completed',
-            ]);
+            $this->updateStage(
+                $sessionId,
+                'completed',
+                'Rangkuman Selesai',
+                'Rangkuman berita berhasil dibuat.',
+                100,
+                ['summary_id' => $newsSummary->id]
+            );
 
             Log::info("NewsSummary #{$newsSummary->id} stored successfully for session #{$sessionId}");
 

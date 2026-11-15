@@ -34,281 +34,411 @@
   </head>
   <body style="background-color: #F6F4EF">
     <div
-      data-pencil-name="04 · Rangkuman"
+      data-pencil-name="03 · Mencari"
       class="box-border w-[1440px] h-[900px] flex flex-col gap-0 justify-start items-start bg-[#F6F4EF] overflow-hidden"
     >
       <div
-        data-pencil-name="Title Area"
-        class="box-border w-full h-fit shrink-0 flex flex-col gap-0 p-[40px_64px_20px_64px] justify-start items-center"
-      >
-        <div
-          data-pencil-name="Meta"
-          class="text-[10px]/[normal] box-border text-[#8C887B] font-['IBM_Plex_Mono',system-ui,sans-serif] font-normal tracking-[1.6px] text-left [white-space:nowrap]"
-        >
-          RANGKUMAN SELESAI · 12 MARET 2026
-        </div>
-        <div
-          data-pencil-name="Gap Title"
-          class="box-border w-[1px] h-[12px] shrink-0 flex flex-row gap-0 justify-start items-start"
-        ></div>
-        <div
-          data-pencil-name="Judul Rangkuman"
-          class="text-[42px]/[48px] box-border w-[760px] text-[#14140F] font-[Newsreader,system-ui,sans-serif] font-normal text-center"
-        >
-          Harga Beras Naik: Poin Penting Hari Ini
-        </div>
-        <div
-          data-pencil-name="Gap Sub"
-          class="box-border w-[1px] h-[10px] shrink-0 flex flex-row gap-0 justify-start items-start"
-        ></div>
-        <div
-          data-pencil-name="Subjudul"
-          class="text-[14px]/[21px] box-border w-[620px] text-[#5B584E] font-[Inter,system-ui,sans-serif] font-normal text-center"
-        >
-          Ringkasan dari 128 artikel pilihan yang sudah diverifikasi dan disusun menjadi poin utama.
-        </div>
-      </div>
+        data-pencil-name="Top Bar"
+        class="box-border w-full h-[88px] shrink-0 flex flex-row gap-0 p-[0px_64px] justify-between items-center"
+      ></div>
       <div
-        data-pencil-name="Body"
-        class="box-border w-full [flex:1_1_0] flex flex-row gap-[24px] p-[0px_0px_0px_64px] justify-start items-start"
+        data-pencil-name="Loading Stage"
+        class="box-border w-full [flex:1_1_0] flex flex-col gap-0 justify-center items-center"
       >
         <div
-          data-pencil-name="Kertas Rangkuman"
-          class="box-border [flex:1_1_0] h-full flex flex-col gap-[18px] p-[32px] justify-start items-start bg-[#FFFFFF] [outline:1px_solid_#E1DCD0] [outline-offset:-0.5px] rounded-[20px] overflow-hidden"
+          data-pencil-name="Loading Stack"
+          class="box-border w-[760px] h-[434px] shrink-0 relative"
         >
           <div
-            data-pencil-name="Paper Header"
-            class="box-border w-full h-fit shrink-0 flex flex-row gap-0 justify-between items-center"
+            data-pencil-name="Status Row"
+            class="box-border w-fit h-fit absolute left-0 top-0 flex flex-row gap-[10px] justify-start items-center [z-index:0]"
           >
             <div
-              data-pencil-name="Paper Label"
-              class="text-[10px]/[normal] box-border text-[#8C887B] font-['IBM_Plex_Mono',system-ui,sans-serif] font-normal tracking-[1.4px] text-left [white-space:nowrap]"
+              data-pencil-name="Pulse"
+              class="box-border w-[8px] shrink-0 h-[8px] flex flex-row gap-0 justify-start items-start bg-[#2C6B52] rounded-[999px]"
+            ></div>
+            <div
+              data-pencil-name="Status Label"
+              class="text-[10px]/[normal] box-border text-[#1D4B3C] font-['IBM_Plex_Mono',system-ui,sans-serif] font-normal tracking-[1.8px] text-left [white-space:nowrap]"
             >
-              RANGKUMAN · 4 POIN
+              AI SEDANG MENCARI
+            </div>
+          </div>
+          <div
+            data-pencil-name="Gap 1"
+            class="box-border w-[1px] h-[20px] absolute left-0 top-[13px] flex flex-row gap-0 justify-start items-start [z-index:1]"
+          ></div>
+          <div
+            data-pencil-name="Query Line"
+            class="text-[52px]/[58px] box-border w-[760px] absolute left-0 top-[33px] text-[#14140F] font-[Newsreader,system-ui,sans-serif] font-normal text-left [z-index:2]"
+          >
+            harga beras naik
+          </div>
+          <div
+            data-pencil-name="Gap 2"
+            class="box-border w-[1px] h-[10px] absolute left-0 top-[91px] flex flex-row gap-0 justify-start items-start [z-index:3]"
+          ></div>
+          <div
+            data-pencil-name="Query Meta"
+            class="text-[14px]/[normal] box-border absolute left-0 top-[101px] text-[#8C887B] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap] [z-index:4]"
+          >
+            12 detik berjalan · 42 dari 128 penerbit dibaca
+          </div>
+          <div
+            data-pencil-name="Gap 3"
+            class="box-border w-[1px] h-[28px] absolute left-0 top-[118px] flex flex-row gap-0 justify-start items-start [z-index:5]"
+          ></div>
+          <div
+            data-pencil-name="Progress Track"
+            class="box-border w-[760px] h-[6px] absolute left-0 top-[146px] flex flex-row gap-0 justify-start items-start bg-[#EDEAE0] rounded-[999px] [z-index:6]"
+          >
+            <div
+              data-pencil-name="Progress Fill"
+              class="box-border w-[471px] h-[6px] absolute left-0 top-0 flex flex-row gap-0 justify-start items-start bg-[#1D4B3C] rounded-[999px] [z-index:0]"
+            ></div>
+          </div>
+          <div
+            data-pencil-name="Gap 4"
+            class="box-border w-[1px] h-[30px] absolute left-0 top-[152px] flex flex-row gap-0 justify-start items-start [z-index:7]"
+          ></div>
+          <div
+            data-pencil-name="Steps"
+            class="box-border w-[760px] h-fit absolute left-0 top-[182px] flex flex-col gap-0 justify-start items-start [z-index:8]"
+          >
+            <div
+              data-pencil-name="Step Menelusuri penerbit"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[14px] p-[13px_0px] justify-start items-center"
+            >
+              <div
+                data-pencil-name="Dot Menelusuri penerbit"
+                class="box-border w-[20px] shrink-0 h-[20px] flex flex-row gap-0 justify-center items-center bg-[#1D4B3C] rounded-[999px]"
+              >
+                <svg
+                  data-pencil-name="Check"
+                  viewBox="0 0 12 12"
+                  preserveAspectRatio="xMidYMid meet"
+                  data-icon-name="check"
+                  data-icon-set="lucide"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="box-border w-[12px] shrink-0 h-[12px] overflow-visible"
+                >
+                  <path
+                    d="M9.841 2.531q-.062 .012-.111 .05-.047 .035-2.637 2.628l-2.593 2.578-1.104-1.104q-1.105-1.102-1.184-1.137-.076-.038-.191-.038-.114 0-.199 .032-.082 .029-.161 .097-.076 .064-.114 .146-.024 .062-.029 .097-.006 .035-.006 .12v.035q-.012 .097 .035 .17 .061 .094 .313 .346 .167 .181 .829 .841l1.284 1.271q.24 .229 .334 .29 .061 .047 .158 .035l.082 .012q.061 0 .12-.023 .073-.062 .275-.247 .205-.187 .686-.653l1.957-1.957q1.787-1.799 2.314-2.326 .528-.53 .554-.589 .035-.073 .035-.205 0-.085-.006-.12-.005-.035-.029-.097-.038-.07-.117-.14-.076-.074-.155-.103-.076-.032-.179-.032-.103 0-.161 .023z"
+                    fill="#f6f4ef"
+                  />
+                </svg>
+              </div>
+              <div
+                data-pencil-name="Step Text"
+                class="box-border [flex:1_1_0] h-fit flex flex-col gap-[2px] justify-start items-start"
+              >
+                <div
+                  data-pencil-name="Step Label"
+                  class="text-[14px]/[normal] box-border text-[#14140F] font-[Inter,system-ui,sans-serif] font-medium text-left [white-space:nowrap]"
+                >
+                  Menelusuri penerbit
+                </div>
+                <div
+                  data-pencil-name="Step Meta"
+                  class="text-[12px]/[normal] box-border text-[#8C887B] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                >
+                  Selesai · 128 sumber
+                </div>
+              </div>
             </div>
             <div
-              data-pencil-name="Tombol Lihat Referensi"
-              class="box-border w-fit shrink-0 h-[40px] flex flex-row gap-[8px] p-[0px_14px] justify-center items-center bg-[#E5EFE7] rounded-[10px]"
+              data-pencil-name="Step Membaca artikel"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[14px] p-[13px_0px] justify-start items-center"
             >
-              <svg
-                data-pencil-name="Ikon Referensi"
-                viewBox="0 0 15 15"
-                preserveAspectRatio="xMidYMid meet"
-                data-icon-name="library"
-                data-icon-set="lucide"
-                xmlns="http://www.w3.org/2000/svg"
-                class="box-border w-[15px] shrink-0 h-[15px] overflow-visible"
-              >
-                <path
-                  d="M2.355 1.89q-.15 .044-.279 .164-.128 .121-.172 .271-.029 .107-.029 5.175 0 5.068 .029 5.175 .063 .227 .249 .347 .187 .118 .403 .096 .22-.022 .385-.187 .135-.136 .164-.315 .03-.121 .03-5.116 0-4.995-.03-5.116-.029-.179-.164-.315-.107-.121-.271-.165-.165-.044-.315-.014zM7.335 3.149q-.271 .092-.406 .33l-.044 .092v9.045l.029 .103q.092 .227 .315 .347 .106 .044 .271 .044 .165 0 .271-.044 .223-.12 .315-.347l.029-.103v-9.045l-.044-.092q-.106-.194-.3-.286-.092-.044-.242-.051-.15-.007-.194 .007zM9.782 3.164q-.107 .048-.206 .139-.095 .088-.135 .172-.037 .081-.044 .125-.007 .044-.007 .157 0 .114 .179 .766 .18 .652 1.08 3.772 1.26 4.409 1.29 4.486 .106 .194 .307 .285 .205 .088 .414 .03 .209-.063 .322-.202 .114-.143 .143-.355 0-.088-.172-.703-.172-.615-1.088-3.827-1.259-4.409-1.3-4.497-.036-.092-.121-.179-.08-.092-.179-.143-.095-.055-.238-.055-.143 0-.245 .029zM4.904 4.395q-.195 .014-.337 .157-.143 .143-.172 .337-.03 .121-.03 3.878 0 3.757 .03 3.849 .029 .194 .164 .315 .213 .209 .495 .187 .285-.022 .45-.264l.029-.029q.048-.059 .063-.209 .014-.179 .029-.857v-6.87l-.044-.103q-.091-.227-.271-.329-.179-.106-.406-.062z"
-                  fill="#1d4b3c"
-                />
-              </svg>
               <div
-                data-pencil-name="Label Referensi"
-                class="text-[13px]/[normal] box-border text-[#1D4B3C] font-[Inter,system-ui,sans-serif] font-semibold text-left [white-space:nowrap]"
+                data-pencil-name="Dot Membaca artikel"
+                class="box-border w-[20px] shrink-0 h-[20px] flex flex-row gap-0 justify-center items-center bg-[#E5EFE7] rounded-[999px]"
               >
-                Lihat Referensi · 128
+                <div
+                  data-pencil-name="Active Dot"
+                  class="box-border w-[7px] shrink-0 h-[7px] bg-[#1D4B3C] rounded-[50%]"
+                ></div>
+              </div>
+              <div
+                data-pencil-name="Step Text"
+                class="box-border [flex:1_1_0] h-fit flex flex-col gap-[2px] justify-start items-start"
+              >
+                <div
+                  data-pencil-name="Step Label"
+                  class="text-[14px]/[normal] box-border text-[#14140F] font-[Inter,system-ui,sans-serif] font-medium text-left [white-space:nowrap]"
+                >
+                  Membaca artikel
+                </div>
+                <div
+                  data-pencil-name="Step Meta"
+                  class="text-[12px]/[normal] box-border text-[#8C887B] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                >
+                  42 dari 96 artikel
+                </div>
+              </div>
+              <div
+                data-pencil-name="Live Tag"
+                class="box-border w-fit shrink-0 h-fit flex flex-row gap-0 p-[4px_9px] justify-start items-start bg-[#E5EFE7] rounded-[999px]"
+              >
+                <div
+                  data-pencil-name="Live Tag Text"
+                  class="text-[9px]/[normal] box-border text-[#1D4B3C] font-['IBM_Plex_Mono',system-ui,sans-serif] font-normal tracking-[1.2px] text-left [white-space:nowrap]"
+                >
+                  BERJALAN
+                </div>
+              </div>
+            </div>
+            <div
+              data-pencil-name="Step Menyusun ringkasan"
+              class="box-border w-full h-fit shrink-0 flex flex-row gap-[14px] p-[13px_0px] justify-start items-center"
+            >
+              <div
+                data-pencil-name="Dot Menyusun ringkasan"
+                class="box-border w-[20px] shrink-0 h-[20px] flex flex-row gap-0 justify-center items-center bg-[#EDEAE0] rounded-[999px]"
+              ></div>
+              <div
+                data-pencil-name="Step Text"
+                class="box-border [flex:1_1_0] h-fit flex flex-col gap-[2px] justify-start items-start"
+              >
+                <div
+                  data-pencil-name="Step Label"
+                  class="text-[14px]/[normal] box-border text-[#8C887B] font-[Inter,system-ui,sans-serif] font-medium text-left [white-space:nowrap]"
+                >
+                  Menyusun ringkasan
+                </div>
+                <div
+                  data-pencil-name="Step Meta"
+                  class="text-[12px]/[normal] box-border text-[#8C887B] font-[Inter,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
+                >
+                  Menunggu artikel selesai
+                </div>
               </div>
             </div>
           </div>
           <div
-            data-pencil-name="Header Divider"
-            class="box-border w-full h-[1px] shrink-0 flex flex-row gap-0 justify-start items-start bg-[#EDE9DF]"
+            data-pencil-name="Gap 5"
+            class="box-border w-[1px] h-[26px] absolute left-0 top-[362px] flex flex-row gap-0 justify-start items-start [z-index:9]"
           ></div>
           <div
-            data-pencil-name="Berita Item"
-            class="box-border w-full h-fit shrink-0 flex flex-col gap-[8px] justify-start items-start"
+            data-pencil-name="Cancel Row"
+            class="box-border w-fit h-fit absolute left-0 top-[388px] flex flex-row gap-[14px] justify-start items-center [z-index:10]"
           >
             <div
-              data-pencil-name="Tag"
-              class="text-[10px]/[normal] box-border text-[#1D4B3C] font-['IBM_Plex_Mono',system-ui,sans-serif] font-normal tracking-[1.4px] text-left [white-space:nowrap]"
-            >
-              POIN UTAMA
-            </div>
-            <div
-              data-pencil-name="Judul Item"
-              class="text-[22px]/[28px] box-border w-full text-[#14140F] font-[Newsreader,system-ui,sans-serif] font-normal text-left"
-            >
-              Kenaikan harga rata-rata nasional
-            </div>
-            <div
-              data-pencil-name="Isi Item"
-              class="text-[14px]/[22px] box-border w-full text-[#5B584E] font-[Inter,system-ui,sans-serif] font-normal text-left"
-            >
-              Harga beras medium naik 6–9% dalam dua minggu terakhir di sejumlah pasar induk, dipicu
-              pasokan yang belum merata setelah panen raya tertunda di beberapa daerah.
-            </div>
-            <div
-              data-pencil-name="Divider"
-              class="box-border w-full h-[1px] shrink-0 flex flex-row gap-0 justify-start items-start bg-[#EDE9DF]"
-            ></div>
-          </div>
-          <div
-            data-pencil-name="Berita Item"
-            class="box-border w-full h-fit shrink-0 flex flex-col gap-[8px] justify-start items-start"
-          >
-            <div
-              data-pencil-name="Tag"
-              class="text-[10px]/[normal] box-border text-[#1D4B3C] font-['IBM_Plex_Mono',system-ui,sans-serif] font-normal tracking-[1.4px] text-left [white-space:nowrap]"
-            >
-              SUMBER
-            </div>
-            <div
-              data-pencil-name="Judul Item"
-              class="text-[22px]/[28px] box-border w-full text-[#14140F] font-[Newsreader,system-ui,sans-serif] font-normal text-left"
-            >
-              Respons pemerintah dan kebijakan
-            </div>
-            <div
-              data-pencil-name="Isi Item"
-              class="text-[14px]/[22px] box-border w-full text-[#5B584E] font-[Inter,system-ui,sans-serif] font-normal text-left"
-            >
-              Bulog menyiapkan operasi pasar tambahan dan percepatan distribusi ke wilayah dengan
-              stok menipis. Pemerintah daerah diminta memantau harga harian secara ketat.
-            </div>
-            <div
-              data-pencil-name="Divider"
-              class="box-border w-full h-[1px] shrink-0 flex flex-row gap-0 justify-start items-start bg-[#EDE9DF]"
-            ></div>
-          </div>
-          <div
-            data-pencil-name="Berita Item"
-            class="box-border w-full h-fit shrink-0 flex flex-col gap-[8px] justify-start items-start"
-          >
-            <div
-              data-pencil-name="Tag"
-              class="text-[10px]/[normal] box-border text-[#1D4B3C] font-['IBM_Plex_Mono',system-ui,sans-serif] font-normal tracking-[1.4px] text-left [white-space:nowrap]"
-            >
-              DAMPAK
-            </div>
-            <div
-              data-pencil-name="Judul Item"
-              class="text-[22px]/[28px] box-border w-full text-[#14140F] font-[Newsreader,system-ui,sans-serif] font-normal text-left"
-            >
-              Pengaruh ke konsumen dan pedagang
-            </div>
-            <div
-              data-pencil-name="Isi Item"
-              class="text-[14px]/[22px] box-border w-full text-[#5B584E] font-[Inter,system-ui,sans-serif] font-normal text-left"
-            >
-              Pedagang kecil melaporkan penurunan margin karena daya beli melemah. Konsumen beralih
-              ke kemasan lebih kecil untuk menekan pengeluaran harian.
-            </div>
-            <div
-              data-pencil-name="Divider"
-              class="box-border w-full h-[1px] shrink-0 flex flex-row gap-0 justify-start items-start bg-[#EDE9DF]"
-            ></div>
-          </div>
-          <div
-            data-pencil-name="Berita Item"
-            class="box-border w-full h-fit shrink-0 flex flex-col gap-[8px] justify-start items-start"
-          >
-            <div
-              data-pencil-name="Tag"
-              class="text-[10px]/[normal] box-border text-[#1D4B3C] font-['IBM_Plex_Mono',system-ui,sans-serif] font-normal tracking-[1.4px] text-left [white-space:nowrap]"
-            >
-              OUTLOOK
-            </div>
-            <div
-              data-pencil-name="Judul Item"
-              class="text-[22px]/[28px] box-border w-full text-[#14140F] font-[Newsreader,system-ui,sans-serif] font-normal text-left"
-            >
-              Proyeksi pekan depan
-            </div>
-            <div
-              data-pencil-name="Isi Item"
-              class="text-[14px]/[22px] box-border w-full text-[#5B584E] font-[Inter,system-ui,sans-serif] font-normal text-left"
-            >
-              Analis memperkirakan harga mulai stabil jika distribusi lancar dan cuaca mendukung
-              panen susulan. Pemantauan tetap difokuskan pada sentra produksi utama.
-            </div>
-            <div
-              data-pencil-name="Divider"
-              class="box-border w-full h-[1px] shrink-0 flex flex-row gap-0 justify-start items-start bg-[#EDE9DF]"
-            ></div>
-          </div>
-        </div>
-        <div
-          data-pencil-name="Sidebar Prompt"
-          class="[box-sizing:content-box] w-[359.5px] shrink-0 h-[736px] flex flex-col gap-[14px] p-[20px_24px_28px_24px] justify-start items-start bg-[#FFFFFF] [border-width:0px_0px_0px_1px] [border-style:solid] [border-color:#E1DCD0] [margin:0px_0px_0px_-0.5px] rounded-[20px_0px_0px_20px]"
-        >
-          <div
-            data-pencil-name="Sidebar Header"
-            class="box-border w-full h-fit shrink-0 flex flex-row gap-0 justify-between items-center"
-          >
-            <div
-              data-pencil-name="Sidebar Title"
-              class="text-[22px]/[normal] box-border text-[#14140F] font-[Newsreader,system-ui,sans-serif] font-normal text-left [white-space:nowrap]"
-            >
-              Tambah Prompt
-            </div>
-            <div
-              data-pencil-name="Tombol Hide"
-              class="box-border w-[36px] shrink-0 h-[36px] flex flex-row gap-0 justify-center items-center bg-[#F6F4EF] [outline:1px_solid_#E1DCD0] [outline-offset:-0.5px] rounded-[10px]"
+              data-pencil-name="Cancel Button"
+              class="box-border w-fit shrink-0 h-[46px] flex flex-row gap-[9px] p-[0px_18px] justify-start items-center bg-[#FFFFFF] [outline:1.5px_solid_#E1DCD0] [outline-offset:-0.75px] rounded-[12px]"
             >
               <svg
-                data-pencil-name="Icon Hide"
-                viewBox="0 0 18 18"
-                preserveAspectRatio="xMidYMid meet"
-                data-icon-name="chevron-right"
-                data-icon-set="lucide"
-                xmlns="http://www.w3.org/2000/svg"
-                class="box-border w-[18px] shrink-0 h-[18px] overflow-visible"
-              >
-                <path
-                  d="M6.552 3.779q-.325 .11-.488 .396-.052 .11-.052 .325 0 .215 .052 .325 .058 .106 2.088 2.14l2.035 2.035-2.035 2.035q-2.03 2.034-2.088 2.144-.052 .106-.052 .303 0 .198 .044 .308 .048 .106 .171 .233 .128 .123 .233 .171 .11 .044 .308 .044 .197 0 .312-.061 .118-.066 2.447-2.395 2.334-2.334 2.395-2.448 .066-.119 .066-.334 0-.215-.057-.321-.053-.11-2.39-2.452l-1.855-1.837q-.431-.431-.593-.536-.128-.092-.255-.092h-.053q-.18 0-.233 .017z"
-                  fill="#5b584e"
-                />
-              </svg>
-            </div>
-          </div>
-          <div
-            data-pencil-name="Sidebar Desc"
-            class="text-[13px]/[20px] box-border w-full text-[#5B584E] font-[Inter,system-ui,sans-serif] font-normal text-left"
-          >
-            Minta AI memperdalam, membandingkan, atau memfilter rangkuman ini sesuai kebutuhanmu.
-          </div>
-          <div
-            data-pencil-name="Prompt Box"
-            class="box-border w-full h-[220px] shrink-0 flex flex-col gap-0 p-[16px] justify-start items-start bg-[#F6F4EF] [outline:1px_solid_#EDE9DF] [outline-offset:-0.5px] rounded-[14px]"
-          ></div>
-          <div
-            data-pencil-name="Spacer"
-            class="box-border w-[1px] [flex:1_1_0] flex flex-row gap-0 justify-start items-start"
-          ></div>
-          <div
-            data-pencil-name="Send Row"
-            class="box-border w-full h-fit shrink-0 flex flex-row gap-0 justify-end items-start"
-          >
-            <div
-              data-pencil-name="Kirim Prompt"
-              class="box-border w-fit shrink-0 h-[48px] flex flex-row gap-[8px] p-[0px_18px] justify-center items-center bg-[#1D4B3C] rounded-[12px]"
-            >
-              <svg
-                data-pencil-name="Send Icon"
+                data-pencil-name="Cancel Icon"
                 viewBox="0 0 16 16"
                 preserveAspectRatio="xMidYMid meet"
-                data-icon-name="send"
+                data-icon-name="x"
                 data-icon-set="lucide"
                 xmlns="http://www.w3.org/2000/svg"
                 class="box-border w-[16px] shrink-0 h-[16px] overflow-visible"
               >
                 <path
-                  d="M14.207 .672q-.016 .015-.031 .015-.047 0-.688 .208l-5.937 2.035q-6.176 2.109-6.321 2.175-.3 .141-.453 .438-.152 .297-.089 .602 .031 .222 .167 .425 .137 .2 .329 .309 .113 .051 2.742 1.105 2.633 1.055 2.746 1.121 .16 .079 .238 .254 .051 .067 1.106 2.7 1.054 2.629 1.105 2.757 .11 .192 .309 .329 .203 .136 .426 .183 .273 .031 .535-.078 .265-.113 .41-.34 .094-.109 .176-.351 .238-.657 2.285-6.664 2.051-6.008 2.066-6.086 .016-.114 0-.243-.047-.414-.375-.675-.328-.266-.746-.219zM9.777 5.281l-2.593 2.574-2.274-.91q-2.269-.914-2.254-.929l9.68-3.313q.016 0-2.559 2.578zM13.121 4.207q-.113 .305-1.664 4.832-1.457 4.289-1.473 4.305-.015 .015-.656-1.582l-1.183-2.946 5.152-5.152q0 0-.176 .543z"
-                  fill="#ffffff"
+                  d="M3.824 3.359q-.289 .098-.433 .352-.047 .098-.047 .289 0 .191 .047 .289 .05 .094 1.855 1.902l1.809 1.809-1.809 1.809q-1.805 1.808-1.855 1.906-.047 .094-.047 .269 0 .176 .039 .274 .043 .094 .152 .207 .113 .109 .207 .152 .098 .039 .274 .039 .175 0 .269-.047 .098-.05 1.906-1.855l1.809-1.809 1.809 1.809q1.808 1.805 1.902 1.855 .098 .047 .273 .047 .176 0 .27-.039 .098-.043 .207-.152 .113-.113 .152-.207 .043-.098 .043-.274 0-.175-.05-.269-.047-.098-1.852-1.906l-1.809-1.809 1.809-1.809q1.805-1.808 1.852-1.902 .05-.098 .05-.289 0-.191-.047-.289-.113-.191-.32-.305-.066-.031-.113-.047-.047-.015-.176-.015-.129 0-.176 .015-.047 .016-.129 .047-.113 .067-1.902 1.86l-1.793 1.789-3.23-3.215q-.356-.336-.481-.434-.098-.062-.226-.062h-.032q-.16 0-.207 .015z"
+                  fill="#a8502a"
                 />
               </svg>
               <div
-                data-pencil-name="Send Label"
-                class="text-[14px]/[normal] box-border text-[#FFFFFF] font-[Inter,system-ui,sans-serif] font-semibold text-left [white-space:nowrap]"
+                data-pencil-name="Cancel Label"
+                class="text-[13.5px]/[normal] box-border text-[#14140F] font-[Inter,system-ui,sans-serif] font-medium text-left [white-space:nowrap]"
               >
-                Kirim Prompt
+                Batalkan pencarian
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div
+        data-pencil-name="Footer"
+        class="box-border w-full h-[72px] shrink-0 flex flex-row gap-0 p-[0px_64px] justify-between items-center"
+      ></div>
     </div>
   </body>
 </html>
+
+
+# IMPLEMENTATION INSTRUCTIONS — REAL-TIME AI NEWS PROCESSING LOADING
+
+## 1. Objective
+
+Implementasikan sistem loading frontend yang sudah tersedia agar terintegrasi dengan proses backend AI News Aggregation & Summarization.
+
+Frontend saat ini sudah memiliki desain loading menggunakan dummy data. Tugas utama adalah menghubungkan desain tersebut dengan status dan aktivitas pemrosesan backend yang sebenarnya.
+
+**PENTING:** Jangan membuat desain loading baru. Gunakan desain, komponen, animasi, struktur, dan layout yang sudah tersedia.
+
+## 2. Implementation Workflow
+
+Ikuti urutan pekerjaan berikut:
+
+1. Periksa seluruh kode frontend yang diberikan.
+2. Identifikasi komponen loading, animasi, state, dan dummy data yang digunakan.
+3. Pahami bagaimana setiap tahapan loading ditampilkan kepada pengguna.
+4. Periksa implementasi backend dan identifikasi proses yang benar-benar tersedia.
+5. Identifikasi API endpoint dan mekanisme komunikasi frontend-backend.
+6. Hubungkan setiap tahapan loading dengan status pemrosesan backend.
+7. Ganti dummy data dengan status aktual dari backend.
+8. Pastikan seluruh transisi loading berjalan sesuai proses yang sebenarnya.
+
+Jangan langsung melakukan perubahan sebelum memahami struktur implementasi yang sudah tersedia.
+
+## 3. Loading Process Stages
+
+Gunakan tahapan berikut sebagai acuan pemetaan status loading:
+
+| Stage | Activity | Description |
+|---|---|---|
+| 1 | Initializing | Mempersiapkan proses pencarian berita |
+| 2 | Prompt Enhancement | AI mengoptimalkan instruksi pencarian berdasarkan prompt pengguna |
+| 3 | Query Generation | AI menghasilkan kata kunci pencarian yang relevan |
+| 4 | News Searching | SearXNG mencari berita dari berbagai sumber |
+| 5 | Content Extraction | Mengambil konten artikel dari URL hasil pencarian |
+| 6 | News Filtering | Menyaring berita relevan dan menghapus duplikasi |
+| 7 | News Analysis | AI menganalisis dan membandingkan informasi dari berbagai artikel |
+| 8 | Summarization | AI menyusun rangkuman berita |
+| 9 | Saving Results | Menyimpan hasil rangkuman dan referensi ke database |
+| 10 | Completed | Seluruh proses berhasil diselesaikan |
+
+Tahapan tersebut merupakan acuan pemetaan UI, bukan asumsi bahwa seluruh proses backend sudah tersedia.
+
+Sesuaikan dengan implementasi backend yang benar-benar ada.
+
+## 4. Backend Integration
+
+Integrasikan frontend dengan backend menggunakan mekanisme komunikasi yang sesuai dengan arsitektur proyek.
+
+Prioritaskan penggunaan:
+
+- Server-Sent Events (SSE) untuk mengirimkan update status proses secara real-time.
+- Laravel Queue untuk menjalankan proses AI secara asynchronous.
+- Database untuk menyimpan status dan riwayat proses.
+
+Jika proyek sudah memiliki mekanisme polling atau WebSocket, evaluasi terlebih dahulu sebelum menambahkan teknologi baru.
+
+Frontend harus menerima informasi seperti:
+
+- Current processing stage.
+- Processing status.
+- Progress percentage jika tersedia dan dapat dihitung secara valid.
+- Activity description.
+- Error message apabila terjadi kegagalan.
+- Final result ketika proses selesai.
+
+Jangan membuat progress percentage palsu hanya berdasarkan timer atau animasi.
+
+## 5. Frontend Behavior
+
+Pastikan desain loading yang sudah tersedia dapat menangani kondisi berikut:
+
+**A. Processing**
+- Menampilkan tahapan yang sedang berjalan.
+- Menandai tahapan sebelumnya sebagai selesai.
+- Menampilkan indikator aktivitas pada tahapan aktif.
+- Memperbarui deskripsi berdasarkan aktivitas backend.
+
+**B. Completed**
+- Menandai seluruh tahapan sebagai selesai.
+- Menghentikan indikator loading.
+- Mengarahkan atau menampilkan hasil rangkuman berita.
+
+**C. Failed**
+- Menampilkan informasi kegagalan.
+- Menunjukkan tahapan tempat proses mengalami error.
+- Menyediakan mekanisme retry jika memungkinkan.
+
+**D. Partial Failure**
+- Jika sebagian artikel gagal diambil tetapi proses masih dapat dilanjutkan, tampilkan status yang sesuai.
+- Jangan menganggap seluruh proses gagal hanya karena satu sumber berita bermasalah.
+
+## 6. Backend Status Contract
+
+Pastikan backend menyediakan struktur status yang konsisten.
+
+Contoh format payload:
+
+```json
+{
+  "session_id": "session-123",
+  "status": "processing",
+  "current_stage": "news_analysis",
+  "stage_label": "Analyzing News",
+  "description": "AI sedang membandingkan informasi dari berbagai sumber berita.",
+  "progress": null,
+  "completed_stages": [
+    "initializing",
+    "prompt_enhancement",
+    "query_generation",
+    "news_searching",
+    "content_extraction",
+    "news_filtering"
+  ],
+  "error": null
+}
+```
+
+Contoh status akhir:
+
+```json
+{
+  "session_id": "session-123",
+  "status": "completed",
+  "current_stage": "completed",
+  "stage_label": "Completed",
+  "description": "Rangkuman berita berhasil dibuat.",
+  "progress": 100,
+  "error": null
+}
+```
+
+Format tersebut merupakan contoh kontrak komunikasi. Sesuaikan implementasinya dengan struktur backend yang ada.
+
+## 7. Important Implementation Constraints
+
+- Jangan mengubah desain visual yang sudah ada.
+- Jangan mengubah CSS, layout, spacing, typography, atau animasi tanpa kebutuhan teknis yang jelas.
+- Jangan membangun ulang komponen loading.
+- Jangan menghapus komponen yang masih digunakan.
+- Jangan mengubah struktur frontend secara besar-besaran.
+- Jangan menggunakan dummy data sebagai sumber status proses setelah integrasi selesai.
+- Jangan membuat status proses yang tidak benar-benar terjadi di backend.
+- Jangan mengarang persentase progress.
+- Hindari polling yang terlalu sering.
+- Pastikan koneksi status dapat dihentikan ketika proses selesai atau komponen dilepas.
+- Tangani reconnect dan kegagalan koneksi dengan benar.
+
+## 8. Expected Result
+
+Hasil akhir yang diharapkan:
+
+1. Desain loading tetap sama dengan implementasi frontend awal.
+2. Dummy data berhasil digantikan oleh data status backend.
+3. Setiap tahapan loading mencerminkan aktivitas backend yang sebenarnya.
+4. Perubahan status dapat ditampilkan secara real-time atau melalui mekanisme update yang tersedia.
+5. Loading menangani kondisi processing, completed, failed, dan partial failure.
+6. Setelah proses selesai, pengguna dapat melihat hasil rangkuman berita beserta referensinya.
+
+## 9. Final Instruction
+
+Sebelum melakukan implementasi, lakukan pemeriksaan terhadap frontend dan backend yang tersedia.
+
+Identifikasi terlebih dahulu:
+- File komponen loading.
+- File yang mengatur dummy data.
+- API endpoint yang tersedia.
+- Backend processing stages.
+- Mekanisme komunikasi status.
+
+Setelah itu, lakukan implementasi dengan perubahan seminimal mungkin.
+
+Jangan melakukan rebuild atau refactoring besar. Fokus hanya pada integrasi loading frontend dengan proses backend aktual.
+
+Setelah implementasi, berikan laporan singkat berisi:
+- File yang diubah.
+- Perubahan yang dilakukan.
+- API endpoint yang digunakan.
+- Tahapan loading yang berhasil diintegrasikan.
+- Tahapan yang belum tersedia di backend.
+- Hasil validasi dan pengujian.

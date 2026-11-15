@@ -16,6 +16,12 @@ class SearchSession extends Model
     protected $fillable = [
         'prompt',
         'status',
+        'current_stage',
+        'stage_label',
+        'description',
+        'progress',
+        'completed_stages',
+        'meta',
         'search_queries',
         'error_message',
     ];
@@ -24,6 +30,9 @@ class SearchSession extends Model
     {
         return [
             'search_queries' => 'array',
+            'completed_stages' => 'array',
+            'meta' => 'array',
+            'progress' => 'integer',
         ];
     }
 

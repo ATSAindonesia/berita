@@ -141,7 +141,7 @@
         if (!empty($summary->summary)) {
             $items[] = [
                 'tag' => 'POIN UTAMA',
-                'title' => 'Ringkasan dan Perkembangan Terkini',
+                'title' => 'Ringkasan Utama',
                 'content' => $summary->summary,
                 'is_list' => false,
             ];
@@ -151,7 +151,7 @@
         if (!empty($summary->key_points) && is_array($summary->key_points)) {
             $items[] = [
                 'tag' => 'POIN PENTING',
-                'title' => 'Fakta Utama dan Temuan Lapangan',
+                'title' => 'Poin-Poin Penting',
                 'content' => $summary->key_points,
                 'is_list' => true,
             ];
@@ -161,7 +161,7 @@
         if (!empty($summary->chronology)) {
             $items[] = [
                 'tag' => 'KRONOLOGI',
-                'title' => 'Linimasa Perkembangan Kejadian',
+                'title' => 'Kronologi Peristiwa',
                 'content' => $summary->chronology,
                 'is_list' => false,
             ];
@@ -171,7 +171,7 @@
         if (!empty($summary->source_comparison)) {
             $items[] = [
                 'tag' => 'SUMBER',
-                'title' => 'Respons Pemerintah dan Kebijakan',
+                'title' => 'Perbandingan Informasi Antar Sumber',
                 'content' => $summary->source_comparison,
                 'is_list' => false,
             ];
@@ -181,7 +181,7 @@
         if (!empty($summary->unconfirmed_facts)) {
             $items[] = [
                 'tag' => 'DAMPAK',
-                'title' => 'Pengaruh ke Konsumen dan Isu Terkait',
+                'title' => 'Fakta Belum Terkonfirmasi',
                 'content' => $summary->unconfirmed_facts,
                 'is_list' => false,
             ];
@@ -191,7 +191,7 @@
         if (!empty($summary->conclusion)) {
             $items[] = [
                 'tag' => 'OUTLOOK',
-                'title' => 'Proyeksi Pekan Depan dan Catatan Akhir',
+                'title' => 'Kesimpulan',
                 'content' => $summary->conclusion,
                 'is_list' => false,
             ];
@@ -527,7 +527,7 @@
               DAFTAR SUMBER BERITA
             </div>
             <h3 class="font-serif-custom text-[24px] text-[#14140F] font-normal m-0">
-              Referensi Terverifikasi ({{ $summary->references->count() }})
+              Daftar Referensi Berita ({{ $summary->references->count() }})
             </h3>
           </div>
           <button

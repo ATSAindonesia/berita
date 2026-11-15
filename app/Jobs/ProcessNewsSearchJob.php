@@ -68,8 +68,27 @@ class ProcessNewsSearchJob implements ShouldQueue
 
         try {
             // ==========================================
-            // Step 1 & 2: Prompt Enhancement
+            // Stage 1: Initializing
             // ==========================================
+            $newsStorageService->updateStage(
+                $session,
+                'initializing',
+                'Mempersiapkan proses pencarian berita',
+                'Mempersiapkan sistem dan memvalidasi topik pencarian.',
+                10
+            );
+
+            // ==========================================
+            // Stage 2: Prompt Enhancement
+            // ==========================================
+            $newsStorageService->updateStage(
+                $session,
+                'prompt_enhancement',
+                'Optimalisasi Prompt',
+                'AI mengoptimalkan instruksi pencarian berdasarkan prompt pengguna.',
+                20
+            );
+
             $enhanced = $promptService->enhancePrompt($userPrompt);
             $newsStorageService->recordAiPrompt(
                 $session,
@@ -81,8 +100,16 @@ class ProcessNewsSearchJob implements ShouldQueue
             );
 
             // ==========================================
-            // Step 3: Search Query Generation
+            // Stage 3: Search Query Generation
             // ==========================================
+            $newsStorageService->updateStage(
+                $session,
+                'query_generation',
+                'Menghasilkan Kata Kunci Pencarian',
+                'AI menghasilkan kata kunci pencarian yang relevan.',
+                30
+            );
+
             $queryPrompt = $promptService->buildQueryGenerationPrompt($userPrompt);
             $queries = [];
             $rawQueryResponse = null;
@@ -116,8 +143,16 @@ class ProcessNewsSearchJob implements ShouldQueue
             );
 
             // ==========================================
-            // Step 4: News Retrieval (SearXNG)
+            // Stage 4: News Searching (SearXNG)
             // ==========================================
+            $newsStorageService->updateStage(
+                $session,
+                'news_searching',
+                'Menelusuri Penerbit Berita',
+                'Mencari berita dari berbagai penerbit dan sumber terpercaya.',
+                45
+            );
+
             $rawResults = [];
             try {
                 $rawResults = $searchService->searchMultipleQueries($queries);
@@ -131,10 +166,60 @@ class ProcessNewsSearchJob implements ShouldQueue
                 $rawResults = $this->buildFallbackNewsResults($userPrompt);
             }
 
+            $sourcesCount = count($rawResults);
+            $newsStorageService->updateStage(
+                $session,
+                'news_searching',
+                'Penelusuran Penerbit Selesai',
+                "Ditemukan {$sourcesCount} sumber berita dari berbagai penerbit.",
+                50,
+                ['sources_count' => $sourcesCount]
+            );
+
             // ==========================================
-            // Step 5: Content Extraction & Filtering
+            // Stage 5: Content Extraction
             // ==========================================
+            $newsStorageService->updateStage(
+                $session,
+                'content_extraction',
+                'Mengekstrak Konten Artikel',
+                "Mengambil konten artikel dari {$sourcesCount} URL sumber berita.",
+                58,
+                ['sources_count' => $sourcesCount]
+            );
+
             $extractedItems = $contentExtractionService->extractAll($rawResults);
+            $extractedCount = count($extractedItems);
+            $failedCount = max(0, $sourcesCount - $extractedCount);
+
+            $extractionDescription = $failedCount > 0
+                ? "Diekstrak {$extractedCount} dari {$sourcesCount} artikel ({$failedCount} sumber tidak dapat diakses)."
+                : "Berhasil mengekstrak {$extractedCount} artikel dari seluruh sumber.";
+
+            $newsStorageService->updateStage(
+                $session,
+                'content_extraction',
+                'Ekstraksi Konten Selesai',
+                $extractionDescription,
+                65,
+                [
+                    'sources_count' => $sourcesCount,
+                    'extracted_count' => $extractedCount,
+                    'failed_count' => $failedCount,
+                ]
+            );
+
+            // ==========================================
+            // Stage 6: News Filtering
+            // ==========================================
+            $newsStorageService->updateStage(
+                $session,
+                'news_filtering',
+                'Menyaring & Memverifikasi Berita',
+                'Menyaring berita relevan dan menghapus duplikasi.',
+                70
+            );
+
             $filtering = $newsFilteringService->filterAndDeduplicate($extractedItems, $userPrompt);
             $filteredArticles = $filtering['articles'];
 
@@ -145,10 +230,32 @@ class ProcessNewsSearchJob implements ShouldQueue
 
             // Persist discovered and filtered news sources
             $storedSources = $newsStorageService->storeNewsSources($session, $filteredArticles);
+            $articlesCount = count($filteredArticles);
+
+            $newsStorageService->updateStage(
+                $session,
+                'news_filtering',
+                'Penyaringan Berita Selesai',
+                "Terpilih {$articlesCount} artikel terverifikasi yang relevan.",
+                76,
+                [
+                    'articles_count' => $articlesCount,
+                    'duplicates_removed' => $filtering['duplicates_count'] ?? 0,
+                ]
+            );
 
             // ==========================================
-            // Step 6: AI News Analysis
+            // Stage 7: AI News Analysis
             // ==========================================
+            $newsStorageService->updateStage(
+                $session,
+                'news_analysis',
+                'Menganalisis Berita',
+                'AI menganalisis dan membandingkan informasi dari berbagai artikel berita.',
+                83,
+                ['articles_count' => $articlesCount]
+            );
+
             $analysisBundle = $newsAnalysisService->analyze($userPrompt, $filteredArticles);
             $newsStorageService->recordAiPrompt(
                 $session,
@@ -160,8 +267,16 @@ class ProcessNewsSearchJob implements ShouldQueue
             );
 
             // ==========================================
-            // Step 7: AI News Summarization
+            // Stage 8: AI News Summarization
             // ==========================================
+            $newsStorageService->updateStage(
+                $session,
+                'summarization',
+                'Menyusun Rangkuman Berita',
+                'AI menyusun intisari, poin penting, kronologi, dan kesimpulan.',
+                90
+            );
+
             $summaryBundle = $summaryService->summarize($userPrompt, $analysisBundle['analysis'], $filteredArticles);
             $newsStorageService->recordAiPrompt(
                 $session,
@@ -173,7 +288,7 @@ class ProcessNewsSearchJob implements ShouldQueue
             );
 
             // ==========================================
-            // Step 8: Database Storage
+            // Stage 9: Database Storage
             // ==========================================
             $summary = $newsStorageService->saveNewsSummary(
                 $session,
@@ -182,15 +297,31 @@ class ProcessNewsSearchJob implements ShouldQueue
                 $summaryBundle['model']
             );
 
+            // ==========================================
+            // Stage 10: Completed
+            // ==========================================
+            $newsStorageService->updateStage(
+                $session,
+                'completed',
+                'Rangkuman Selesai',
+                'Rangkuman berita berhasil dibuat.',
+                100,
+                ['summary_id' => $summary->id]
+            );
+
             Log::info("ProcessNewsSearchJob successfully finished for session #{$session->id}, created Summary #{$summary->id}");
         } catch (Exception $e) {
             Log::error("ProcessNewsSearchJob failed for session #{$session->id}: ".$e->getMessage(), [
                 'trace' => $e->getTraceAsString(),
             ]);
 
+            $session->refresh();
+            $failedStage = $session->current_stage ?? 'initializing';
+
             $session->update([
                 'status' => 'failed',
                 'error_message' => $e->getMessage(),
+                'description' => "Terjadi kendala pada tahap {$failedStage}: ".$e->getMessage(),
             ]);
 
             throw $e;
