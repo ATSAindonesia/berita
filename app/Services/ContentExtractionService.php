@@ -83,6 +83,8 @@ class ContentExtractionService
     public function extractArticle(string $url): ?array
     {
         try {
+            // Batasi download ke 2MB per URL agar tidak OOM di mesin RAM kecil.
+            $maxBytes = 2 * 1024 * 1024;
             $response = Http::timeout($this->timeout)
                 ->withHeaders([
                     'User-Agent' => $this->userAgent,
@@ -90,6 +92,7 @@ class ContentExtractionService
                     'Accept-Language' => 'id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7',
                 ])
                 ->withoutVerifying()
+                ->withOptions(['stream' => true])
                 ->get($url);
 
             if ($response->failed()) {
@@ -98,7 +101,13 @@ class ContentExtractionService
                 return null;
             }
 
-            $html = $response->body();
+            $body = $response->toPsrResponse()->getBody();
+            $html = '';
+            while (! $body->eof() && strlen($html) < $maxBytes) {
+                $html .= $body->read(65536);
+            }
+            $body->close();
+
             if (empty($html) || mb_strlen($html) < 200) {
                 return null;
             }
@@ -229,13 +238,19 @@ class ContentExtractionService
         libxml_clear_errors();
         libxml_use_internal_errors($previousEntityLoader);
 
+        // Truncate clean_content: max 15K chars per artikel, cukup untuk summarisasi.
+        $cleanContent = trim($bodyText);
+        if (mb_strlen($cleanContent) > 15000) {
+            $cleanContent = mb_substr($cleanContent, 0, 15000).'...';
+        }
+
         return [
             'title' => trim($title ?? ''),
             'author' => trim($author ?? ''),
             'published_at' => $publishedAt,
             'canonical_url' => $canonical ?: $sourceUrl,
-            'clean_content' => trim($bodyText),
-            'raw_content' => mb_substr(strip_tags($html), 0, 10000),
+            'clean_content' => $cleanContent,
+            'raw_content' => mb_substr(strip_tags($html), 0, 2000),
         ];
     }
 
